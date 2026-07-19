@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BSP Merchant</string>
+    <string name="app_version">1.0.0</string>
+    <string name="splash_subtitle">QR Payment Notifications</string>
+    <string name="login_title">Merchant Login</string>
+    <string name="login_mpin_hint">Enter MPIN</string>
+    <string name="login_btn">Sign In</string>
+    <string name="home_title">Payments</string>
+    <string name="no_notifications">No payment notifications yet</string>
+    <string name="notif_amount">Amount</string>
+    <string name="notif_reference">Reference</string>
+    <string name="notif_time">Time</string>
+    <string name="notif_customer">Customer</string>
+    <string name="notif_status">Status</string>
+    <string name="notif_completed">Completed</string>
+    <string name="notif_pending">Pending</string>
+    <string name="btn_logout">Logout</string>
+    <string name="session_timeout">Session expired. Please login again.</string>
+    <string name="channel_name">Merchant Payments</string>
+    <string name="channel_desc">Real-time QR payment notifications</string>
+    <string name="error_network">Network error. Please try again.</string>
+    <string name="error_server">Server error. Please try again later.</string>
+    <string name="error_invalid_mpin">Invalid MPIN. Please try again.</string>
+
+    <!-- Crypto configuration (replace with your own keys in production) -->
+    <string name="key"></string>
+    <string name="iv"></string>
+    <string name="algorithm">AES/CBC/PKCS5Padding</string>
+    <string name="secretKeySpecalgorithm">AES</string>
+</resources>

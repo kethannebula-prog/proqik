@@ -1,0 +1,5 @@
+-keep class com.bm.bspmer.beans.** { *; }
+-keep class com.bm.bspmer.converter.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn com.google.firebase.**

@@ -1,0 +1,39 @@
+# Java
+*.class
+*.jar
+*.war
+*.zip
+target/
+WEB-INF/classes/
+WEB-INF/lib/
+
+# Maven
+!src/main/webapp/WEB-INF/lib/*.jar
+
+# Eclipse / IDE
+.project
+.classpath
+.settings/
+*.iml
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment / Secrets
+**/db.properties
+!proqik_lat/src/main/resources/db.properties
+**/wallet/
+**/*.jks
+**/google-services.json
+.env
+*.env.local
+
+# Node
+node_modules/
+
+# Large media (replace with optimized versions)
+proqik_lat/src/main/webapp/images/album-editor.jpg
+proqik_lat/src/main/webapp/images/videography.jpg
+proqik_lat/src/main/webapp/resources/img/hero-person-1.png

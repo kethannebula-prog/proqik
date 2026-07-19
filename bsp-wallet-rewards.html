@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=430, initial-scale=1">
+<title>BSP eDollar - Wallet Rewards</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#e0ded9; display:flex; justify-content:center; align-items:center; min-height:100vh; font-family:'Poppins',sans-serif; }
+.phone {
+  width:286px; height:749px; background:#e8e8e8; border-radius:40px;
+  overflow:hidden; position:relative;
+  box-shadow:0 0 0 8px #1a1a1a,0 0 0 10px #444,0 20px 60px rgba(0,0,0,.3);
+}
+.notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:26px; background:#1a1a1a; border-radius:0 0 14px 14px; z-index:200; }
+
+/* Status */
+.st { height:36px; background:#24523B; display:flex; align-items:center; justify-content:space-between; padding:0 16px; color:#fff; font-size:9px; font-weight:500; }
+.st .tm { font-size:11px; font-weight:600; }
+.sti { display:flex; gap:4px; font-size:9px; }
+
+/* Header */
+.hd { height:44px; background:#24523B; display:flex; align-items:center; padding:0 12px; gap:6px; }
+.hd .bk { color:#fff; cursor:pointer; display:flex; align-items:center; padding:2px; }
+.hd h1 { flex:1; font-size:13px; font-weight:600; color:#fff; letter-spacing:.2px; }
+.hd .sp { width:24px; }
+
+/* Screens */
+.sc { display:none; position:absolute; top:36px; left:0; right:0; bottom:0; flex-direction:column; }
+.sc.ac { display:flex; }
+.sb { flex:1; overflow-y:auto; }
+.sb::-webkit-scrollbar { width:0; }
+.bt { padding:10px 14px; }
+.bt-r { display:flex; gap:10px; }
+.bt-r .bp { flex:1; }
+.bpc {
+  flex:1; padding:12px; background:#fff; color:#0b0b0b; border:1.5px solid #d9d9d9; border-radius:10px;
+  font-size:11px; font-weight:600; font-family:'Poppins',sans-serif; cursor:pointer; text-align:center; letter-spacing:.3px;
+}
+
+/* SVG icon base */
+.sv { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.sv svg { display:block; stroke:currentColor; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.s20 svg { width:20px; height:20px; stroke-width:2; }
+.s22 svg { width:22px; height:22px; stroke-width:2; }
+.s24 svg { width:24px; height:24px; stroke-width:1.8; }
+.s28 svg { width:28px; height:28px; stroke-width:1.5; }
+.s32 svg { width:32px; height:32px; stroke-width:1.5; }
+.s36 svg { width:36px; height:36px; stroke-width:1.5; }
+
+/* Button */
+.bp {
+  width:100%; padding:12px; background:#24523B; color:#fff; border:none; border-radius:10px;
+  font-size:11px; font-weight:600; font-family:'Poppins',sans-serif; cursor:pointer; text-align:center; letter-spacing:.3px;
+}
+
+/* Cards */
+.cd { background:#fff; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+
+/* ────── SCREEN 1: Dashboard ────── */
+.gbg { height:100px; background:#24523B; }
+.dc {
+  margin:-68px 12px 0; background:#fff; border-radius:14px; padding:14px 16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.07); position:relative; cursor:pointer;
+}
+.dc .ac { position:absolute; top:0; left:0; right:0; height:4px; background:#24523B; border-radius:14px 14px 0 0; }
+.dc .rw { display:flex; align-items:center; gap:10px; }
+.dc .iw {
+  width:40px; height:40px; border-radius:10px; background:#f5f0e6;
+  display:flex; align-items:center; justify-content:center; color:#24523B; flex-shrink:0;
+}
+.dc .if { flex:1; }
+.dc .if .lb { font-size:9px; color:#888; font-weight:500; }
+.dc .if .pt { font-size:16px; font-weight:700; color:#24523B; margin:1px 0; letter-spacing:-.3px; }
+.dc .if .su { font-size:9px; color:#2e7d32; font-weight:500; }
+.dc .ar { color:#d4c4a8; }
+
+.qac { display:flex; justify-content:center; margin:10px 12px; }
+.qa {
+  background:#fff; border-radius:10px; padding:10px 28px; text-align:center; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:4px; box-shadow:0 1px 4px rgba(0,0,0,.05);
+}
+.qa .qi { color:#24523B; }
+.qa .ql { font-size:10px; color:#555; font-weight:500; letter-spacing:.2px; }
+
+/* ────── SCREEN 2: Points Detail ────── */
+.ph { text-align:center; padding:32px 16px 16px; }
+.ph .bg { font-size:32px; font-weight:800; color:#24523B; line-height:1.1; letter-spacing:-.5px; }
+.ph .un { font-size:13px; color:#888; font-weight:500; }
+.ph .eq { font-size:11px; color:#2e7d32; font-weight:500; margin-top:6px; }
+.ph .if2 { font-size:9px; color:#888; margin-top:3px; }
+
+/* ────── SCREEN 3: Redemption Choice ────── */
+.cc {
+  margin:6px 12px; padding:12px 14px; background:#fff; border-radius:12px;
+  border:1.5px solid #eee; display:flex; align-items:center; gap:10px; cursor:pointer;
+}
+.cc.sl, .cc:hover { border-color:#24523B; background:#fafcfa; }
+.cc .ci { color:#24523B; flex-shrink:0; }
+.cc .cb { flex:1; }
+.cc .cb .ct { font-size:11px; font-weight:600; color:#0b0b0b; }
+.cc .cb .cd { font-size:9px; color:#888; margin-top:1px; line-height:1.3; }
+.cc .ra { width:18px; height:18px; border-radius:50%; border:2px solid #ccc; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.cc.sl .ra { border-color:#24523B; }
+.cc.sl .ra::after { content:''; width:10px; height:10px; border-radius:50%; background:#24523B; }
+
+.ai { margin:0 12px 4px; display:none; }
+.ai.sh { display:block; }
+.ai label { font-size:9px; color:#555; font-weight:500; display:block; margin-bottom:4px; }
+.ai .aw { display:flex; align-items:center; border:1px solid #ddd; border-radius:8px; padding:0 10px; }
+.ai .aw sp { font-size:13px; font-weight:600; color:#24523B; }
+.ai .aw input {
+  flex:1; border:none; padding:10px 6px; font-size:14px; font-weight:600;
+  font-family:'Poppins',sans-serif; color:#0b0b0b; outline:none;
+}
+.ai .av { font-size:9px; color:#888; margin-top:4px; }
+
+/* ────── SCREEN 4: Wallet Select ────── */
+.wi {
+  margin:4px 12px; padding:12px; background:#fff; border-radius:10px;
+  border:1.5px solid #eee; display:flex; align-items:center; gap:10px; cursor:pointer;
+}
+.wi.sl, .wi:hover { border-color:#24523B; }
+.wi .wii { color:#24523B; flex-shrink:0; }
+.wi .wb { flex:1; }
+.wi .wb .wt { font-size:11px; font-weight:600; color:#0b0b0b; }
+.wi .wb .ws { font-size:8px; color:#888; margin-top:1px; }
+.wi .wb .wbl { font-size:10px; font-weight:600; color:#24523B; margin-top:3px; }
+.wi .wr { width:18px; height:18px; border-radius:50%; border:2px solid #ccc; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.wi.sl .wr { border-color:#24523B; }
+.wi.sl .wr::after { content:''; width:10px; height:10px; border-radius:50%; background:#24523B; }
+
+/* ────── SCREEN 5: MPIN ────── */
+.mh { text-align:center; padding:24px 16px 12px; }
+.mh .lw {
+  width:48px; height:48px; border-radius:50%; background:#f5f0e6;
+  display:flex; align-items:center; justify-content:center; margin:0 auto 12px; color:#24523B;
+}
+.mh .h { font-size:13px; font-weight:600; color:#0b0b0b; }
+.mh .s { font-size:9px; color:#888; margin-top:2px; }
+.pd { display:flex; justify-content:center; gap:14px; margin:24px 0; }
+.pdt { width:12px; height:12px; border-radius:50%; border:2px solid #ddd; }
+.pdt.fl { background:#24523B; border-color:#24523B; }
+.kp { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:0 36px; margin-bottom:12px; }
+.key { height:46px; border:none; background:#f5f5f5; border-radius:12px; font-size:18px; font-weight:600; cursor:pointer; font-family:'Poppins',sans-serif; color:#0b0b0b; }
+.key:hover { background:#eee; }
+.kc { display:flex; align-items:center; justify-content:center; color:#888; }
+.kc svg { width:20px; height:20px; stroke:#888; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ────── SCREEN 6: Success ────── */
+.sh { text-align:center; padding:40px 16px; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.sh .ck {
+  width:60px; height:60px; border-radius:50%; background:#e8f5e9;
+  display:flex; align-items:center; justify-content:center; margin-bottom:14px; color:#2e7d32;
+}
+.sh .ck svg { width:28px; height:28px; stroke:currentColor; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.sh .h { font-size:16px; font-weight:700; color:#24523B; margin-bottom:2px; }
+.sh .s { font-size:10px; color:#666; }
+.sh .am { font-size:20px; font-weight:700; color:#24523B; margin:8px 0 2px; letter-spacing:-.3px; }
+.sh .wl2 { font-size:9px; color:#888; }
+.sh .nb { font-size:10px; color:#2e7d32; font-weight:500; margin-top:12px; }
+
+/* ────── COMMON ────── */
+.nt { margin:3px 12px; background:#f5f0e6; border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:6px; }
+.nt .nti { color:#24523B; flex-shrink:0; }
+.nt .ntt { font-size:8px; color:#24523B; font-weight:500; line-height:1.3; }
+.sl { font-size:10px; font-weight:600; color:#0b0b0b; margin:12px 12px 6px; }
+.fi { animation:fi .25s ease; }
+@keyframes fi { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="notch"></div>
+  <div class="st">
+    <span class="tm">9:41</span>
+    <span class="sti">●●●● ○</span>
+  </div>
+
+  <!-- ========== SCREEN 1: Dashboard ========== -->
+  <div id="s1" class="sc ac">
+    <div class="hd">
+      <span class="sp"></span>
+      <h1>eDollar</h1>
+      <span class="bk sv s20"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+    </div>
+    <div class="sb">
+      <div class="gbg"></div>
+      <div class="dc" onclick="go(2)">
+        <div class="ac"></div>
+        <div class="rw">
+          <div class="iw sv s20"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="if">
+            <div class="lb">BSP Points Earned</div>
+            <div class="pt">12,850 pts</div>
+            <div class="su">≈ $128.50 value</div>
+          </div>
+          <span class="ar sv s20"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </div>
+      <div class="qac">
+        <div class="qa" onclick="go(3)">
+          <span class="qi sv s20"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></span>
+          <span class="ql">Redeem</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN 2: Points Detail ========== -->
+  <div id="s2" class="sc">
+    <div class="hd">
+      <span class="bk sv s20" onclick="go(1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      <h1>BSP Points Earned</h1>
+      <span class="sp"></span>
+    </div>
+    <div class="sb">
+      <div class="ph fi">
+        <div class="bg">12,850</div>
+        <div class="un">pts</div>
+        <div class="eq">≈ $128.50 value</div>
+        <div class="if2">Across 3 active wallets</div>
+      </div>
+      <div class="nt">
+        <span class="nti sv s16"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span>
+        <span class="ntt">Points accumulated across all eDollar wallets. Rate: 100 pts = $1.00</span>
+      </div>
+    </div>
+    <div class="bt">
+      <button class="bp" onclick="go(3)">Redeem Points</button>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN 3: Redemption Choice ========== -->
+  <div id="s3" class="sc">
+    <div class="hd">
+      <span class="bk sv s20" onclick="go(2)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      <h1>Redeem Points</h1>
+      <span class="sp"></span>
+    </div>
+    <div class="sb">
+      <div class="ph" style="padding:18px 12px 4px;">
+        <div style="font-size:10px;color:#888;font-weight:500;">Available Balance</div>
+        <div style="font-size:20px;font-weight:700;color:#24523B;margin:2px 0;letter-spacing:-.3px;">12,850 pts</div>
+        <div style="font-size:10px;color:#2e7d32;font-weight:500;">= $128.50</div>
+      </div>
+      <div class="sl">Choose redemption type</div>
+      <div class="cc" id="pc" onclick="selP()">
+        <span class="ci sv s22"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v12"/></svg></span>
+        <div class="cb">
+          <div class="ct">Partial Redemption</div>
+          <div class="cd">Enter a specific amount of points to redeem</div>
+        </div>
+        <div class="ra"></div>
+      </div>
+      <div class="ai" id="ai">
+        <label>Enter points to redeem</label>
+        <div class="aw">
+          <sp>$</sp>
+          <input type="number" id="am" value="500" step="100" min="100" oninput="upV()">
+        </div>
+        <div class="av" id="pv">= $5.00 value</div>
+      </div>
+      <div class="cc" id="fc" onclick="selF()">
+        <span class="ci sv s22"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+        <div class="cb">
+          <div class="ct">Full Redemption</div>
+          <div class="cd">Redeem all 12,850 points at once — zeros out balance</div>
+        </div>
+        <div class="ra"></div>
+      </div>
+    </div>
+    <div class="bt">
+      <div class="bt-r">
+        <button class="bpc" onclick="go(2)">Cancel</button>
+        <button class="bp" id="rb" onclick="if(!document.getElementById('pc').classList.contains('sl')&&!document.getElementById('fc').classList.contains('sl'))return;go(4)" style="opacity:.4;font-size:10px;">Select redemption type</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN 4: Wallet Selection ========== -->
+  <div id="s4" class="sc">
+    <div class="hd">
+      <span class="bk sv s20" onclick="go(3)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      <h1>Select Wallet</h1>
+      <span class="sp"></span>
+    </div>
+    <div class="sb">
+      <div class="sl" style="margin-top:14px;">Choose wallet to credit</div>
+      <div class="wi sl" onclick="selW(this)">
+        <span class="wii sv s22"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 22 7 12 2"/><path d="M2 10h20"/><path d="M4 10v8"/><path d="M8 10v8"/><path d="M12 10v8"/><path d="M16 10v8"/><path d="M20 10v8"/><path d="M4 18h16v3H4z"/></svg></span>
+        <div class="wb">
+          <div class="wt">90000000127 - Travel Wallet</div>
+          <div class="ws">Avail Balance</div>
+          <div class="wbl">FJD 4,830.00</div>
+        </div>
+        <div class="wr"></div>
+      </div>
+      <div class="wi" onclick="selW(this)">
+        <span class="wii sv s22"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+        <div class="wb">
+          <div class="wt">90000000190 - Air Flight</div>
+          <div class="ws">Avail Balance</div>
+          <div class="wbl">FJD 3,091.49</div>
+        </div>
+        <div class="wr"></div>
+      </div>
+      <div class="wi" onclick="selW(this)">
+        <span class="wii sv s22"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+        <div class="wb">
+          <div class="wt">90000000065 - Food Wallet</div>
+          <div class="ws">Avail Balance</div>
+          <div class="wbl">FJD 3.00</div>
+        </div>
+        <div class="wr"></div>
+      </div>
+      <div class="nt" style="margin:10px 12px;">
+        <span class="nti sv s16"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <span class="ntt">MPIN required to authorize this redemption</span>
+      </div>
+    </div>
+    <div class="bt">
+      <div class="bt-r">
+        <button class="bpc" onclick="go(3)">Cancel</button>
+        <button class="bp" onclick="go(5)">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN 5: MPIN (4 digits) ========== -->
+  <div id="s5" class="sc">
+    <div class="hd">
+      <span class="bk sv s20" onclick="go(4)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      <h1>Enter MPIN</h1>
+      <span class="sp"></span>
+    </div>
+    <div class="sb" style="display:flex;flex-direction:column;">
+      <div class="mh fi" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div class="lw sv s24"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="h">Enter your MPIN</div>
+        <div class="s">Authorize redemption of points</div>
+        <div class="pd" id="pds">
+          <div class="pdt"></div>
+          <div class="pdt"></div>
+          <div class="pdt"></div>
+          <div class="pdt"></div>
+        </div>
+        <div style="font-size:10px;color:#2e7d32;font-weight:500;margin-bottom:6px;" id="pp"></div>
+      </div>
+      <div class="kp">
+        <button class="key" onclick="pp('1')">1</button>
+        <button class="key" onclick="pp('2')">2</button>
+        <button class="key" onclick="pp('3')">3</button>
+        <button class="key" onclick="pp('4')">4</button>
+        <button class="key" onclick="pp('5')">5</button>
+        <button class="key" onclick="pp('6')">6</button>
+        <button class="key" onclick="pp('7')">7</button>
+        <button class="key" onclick="pp('8')">8</button>
+        <button class="key" onclick="pp('9')">9</button>
+        <div></div>
+        <button class="key" onclick="pp('0')">0</button>
+        <button class="key kc" onclick="cp()"><svg viewBox="0 0 24 24"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN 6: Success ========== -->
+  <div id="s6" class="sc">
+    <div class="hd">
+      <span class="sp"></span>
+      <h1>Success</h1>
+      <span class="sp"></span>
+    </div>
+    <div class="sb" style="display:flex;flex-direction:column;">
+      <div class="sh fi">
+        <div class="ck"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div class="h">Redemption Successful!</div>
+        <div class="s">Your points have been redeemed</div>
+        <div class="am" id="sa">$5.00</div>
+        <div class="wl2" id="sw">Credited to 90000000127 - Travel Wallet</div>
+        <div class="nb" id="snb">New Balance: 12,350 pts</div>
+      </div>
+    </div>
+    <div class="bt">
+      <button class="bp" onclick="go(1)">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function go(n) {
+  document.querySelectorAll('.sc').forEach(s => s.classList.remove('ac'));
+  document.getElementById('s'+n).classList.add('ac');
+  const b = document.querySelector('#s'+n+' .sb');
+  if (b) b.scrollTop = 0;
+  if (n===5) rp();
+  if (n===6) sV();
+}
+function selP() {
+  document.getElementById('pc').classList.add('sl');
+  document.getElementById('fc').classList.remove('sl');
+  document.getElementById('ai').classList.add('sh');
+  const b = document.getElementById('rb');
+  b.textContent = 'Confirm'; b.style.opacity = '1'; b.style.fontSize = '11px';
+}
+function selF() {
+  document.getElementById('pc').classList.remove('sl');
+  document.getElementById('fc').classList.remove('sl');
+  document.getElementById('fc').classList.add('sl');
+  document.getElementById('ai').classList.remove('sh');
+  const b = document.getElementById('rb');
+  b.textContent = 'Redeem All 12,850 pts'; b.style.opacity = '1'; b.style.fontSize = '11px';
+}
+function upV() {
+  const p = parseInt(document.getElementById('am').value)||0;
+  document.getElementById('pv').textContent = '= $' + (p/100).toFixed(2) + ' value';
+}
+function selW(el) {
+  document.querySelectorAll('.wi').forEach(w => w.classList.remove('sl'));
+  el.classList.add('sl');
+}
+let pin = '';
+function pp(d) {
+  if (pin.length>=4) return;
+  pin+=d; uP();
+  if (pin.length===4) setTimeout(()=>go(6),300);
+}
+function cp() { pin=pin.slice(0,-1); uP(); }
+function rp() { pin=''; uP(); }
+function uP() {
+  document.querySelectorAll('.pdt').forEach((d,i)=>d.classList.toggle('fl',i<pin.length));
+  document.getElementById('pp').textContent = pin ? '•'.repeat(pin.length) : '';
+}
+function sV() {
+  const f = document.getElementById('fc').classList.contains('sl');
+  if (f) {
+    document.getElementById('sa').textContent = '$128.50';
+    document.getElementById('snb').textContent = 'New Balance: 0 pts';
+  } else {
+    const p = parseInt(document.getElementById('am').value)||500;
+    document.getElementById('sa').textContent = '$'+(p/100).toFixed(2);
+    document.getElementById('snb').textContent = 'New Balance: '+(12850-p).toLocaleString()+' pts';
+  }
+  const sw = document.querySelector('.wi.sl');
+  if (sw) {
+    const n = sw.querySelector('.wt').textContent;
+    const nu = sw.querySelector('.wbl').textContent;
+    document.getElementById('sw').textContent = 'Credited to '+n;
+  }
+}
+upV();
+</script>
+</body>
+</html>
