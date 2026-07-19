@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kethan Reddy — Full-Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2a;--gold:#c9a84c;--text:#e8e8ed;--muted:#6b6b80}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:900px;margin:0 auto;padding:60px 24px}
+
+.hero{text-align:center;padding:80px 0 60px}
+.hero h1{font-size:40px;font-weight:300;letter-spacing:2px;margin-bottom:12px}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:16px;color:var(--muted);max-width:560px;margin:0 auto}
+.hero-links{margin-top:24px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero-links a{padding:10px 24px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text);font-size:13px;letter-spacing:1px;transition:all .3s}
+.hero-links a:hover{border-color:var(--gold);color:var(--gold)}
+
+section{margin-bottom:60px}
+h2{font-size:20px;font-weight:400;letter-spacing:2px;margin-bottom:24px;color:var(--gold)}
+h2:after{content:'';display:block;width:40px;height:1px;background:var(--gold);margin-top:8px}
+
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:16px}
+.project-card h3{font-size:18px;font-weight:400;margin-bottom:8px}
+.project-card .tag{display:inline-block;background:rgba(201,169,76,.1);color:var(--gold);font-size:11px;padding:3px 10px;border-radius:4px;margin:4px 4px 0 0;letter-spacing:.5px}
+.project-card p{font-size:14px;color:var(--muted);margin-top:12px}
+.project-card a{color:var(--gold);text-decoration:none;font-size:13px;display:inline-block;margin-top:12px}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.skill-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:14px}
+.skill-item .label{color:var(--muted);font-size:11px;letter-spacing:1px;margin-bottom:4px}
+
+.repo-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:12px}
+.repo-card h3{font-size:15px;font-weight:400}
+.repo-card p{font-size:13px;color:var(--muted);margin-top:4px}
+.repo-card a{color:var(--gold);text-decoration:none;font-size:13px;display:inline-block;margin-top:8px}
+
+.footer{text-align:center;padding:40px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <h1>KETHAN <span>REDDY</span></h1>
+  <p>Full-stack developer who builds complete systems — web applications, Android apps, APIs, and design tooling. I ship production-ready code end to end.</p>
+  <div class="hero-links">
+    <a href="https://github.com/kethannebula-prog" target="_blank">GITHUB</a>
+    <a href="https://github.com/kethannebula-prog/proqik" target="_blank">PORTFOLIO PROJECT</a>
+    <a href="mailto:kethannebula@gmail.com">EMAIL</a>
+  </div>
+</div>
+
+<section>
+  <h2>Featured Project</h2>
+  <div class="project-card">
+    <h3>ProQik — Creative Marketplace</h3>
+    <div>
+      <span class="tag">Java</span>
+      <span class="tag">JSP/Servlets</span>
+      <span class="tag">Oracle DB</span>
+      <span class="tag">Android</span>
+      <span class="tag">AWS SES</span>
+      <span class="tag">Google OAuth</span>
+      <span class="tag">Figma Plugin</span>
+    </div>
+    <p>A complete multi-platform system connecting clients with creative professionals (photographers, videographers, designers). Built entirely solo — web backend, Android app, and a Figma plugin for UI prototyping.</p>
+    <p><strong>Web:</strong> Jakarta Servlets 4.0, JSP, Oracle Autonomous DB, email OTP via AWS SES, Google OAuth 2.0</p>
+    <p><strong>Android:</strong> Java, Firebase Cloud Messaging, ZXing QR scanning, AES encryption</p>
+    <p><strong>Design:</strong> Figma plugin generating 6 mobile screens programmatically</p>
+    <a href="https://github.com/kethannebula-prog/proqik" target="_blank">VIEW ON GITHUB →</a>
+  </div>
+</section>
+
+<section>
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-item"><div class="label">Backend</div>Java 8, Jakarta Servlets, JSP, REST APIs</div>
+    <div class="skill-item"><div class="label">Database</div>Oracle Autonomous DB, JDBC, SQL</div>
+    <div class="skill-item"><div class="label">Android</div>Java Android, Firebase, ZXing, AES</div>
+    <div class="skill-item"><div class="label">DevOps</div>Maven, Tomcat 9, Git, GitHub Actions</div>
+    <div class="skill-item"><div class="label">Cloud</div>AWS SES, Oracle Cloud, Google OAuth</div>
+    <div class="skill-item"><div class="label">Frontend</div>HTML5, CSS3, JavaScript, JSTL</div>
+    <div class="skill-item"><div class="label">Tools</div>Eclipse, Figma Plugin API, Gradle</div>
+    <div class="skill-item"><div class="label">Protocols</div>OAuth 2.0, SMTP, JDBC, HTTPS</div>
+  </div>
+</section>
+
+<section>
+  <h2>GitHub Repos</h2>
+  <div class="repo-card">
+    <h3>proqik</h3>
+    <p>Creative marketplace — Java web app + Android app + Figma plugin. Oracle DB, OAuth, OTP, Tomcat deployment.</p>
+    <a href="https://github.com/kethannebula-prog/proqik" target="_blank">VIEW →</a>
+  </div>
+</section>
+
+<div class="footer">
+  Kethan Reddy &middot; Available for freelance work &middot; kethannebula@gmail.com
+</div>
+
+</div>
+</body>
+</html>
