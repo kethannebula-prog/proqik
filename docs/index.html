@@ -3,130 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kethan Nanda — Full-Stack Developer</title>
+<title>Kethan Nanda — System Builder</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#08080e;--card:#0f0f18;--border:#1a1a2a;--gold:#c9a84c;--gold-dim:#a88a3a;--gold-glow:rgba(201,169,76,.15);--text:#eaeaf0;--muted:#6b6b85;--accent:#7c6f4a}
+:root{--bg:#f7f5f0;--text:#1a1a1a;--muted:#6b6b6b;--line:#d4d0c8;--accent:#b8860b;--accent-light:#d4a017;--card-bg:#ffffff;--shadow:rgba(0,0,0,.04);--font-sans:'Inter',system-ui,sans-serif;--font-mono:'JetBrains Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.6}
 
-/* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,14,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 24px}
-.nav-logo{font-weight:600;font-size:16px;letter-spacing:2px;color:var(--gold);text-decoration:none}
-.nav-logo span{color:var(--text)}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
-.nav-links a:hover{color:var(--gold)}
+/* ───────────────── grid background ───────────────── */
+body::before{content:'';position:fixed;inset:0;background-image:
+  linear-gradient(var(--line) 1px,transparent 1px),
+  linear-gradient(90deg,var(--line) 1px,transparent 1px);
+background-size:48px 48px;opacity:.25;pointer-events:none;z-index:0}
+.container,.nav-inner{position:relative;z-index:1}
 
-/* container */
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
+/* ───────────────── nav ───────────────── */
+nav{border-bottom:1px solid var(--line);background:rgba(247,245,240,.92);backdrop-filter:blur(8px);position:sticky;top:0;z-index:10}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 24px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text);font-weight:600;font-size:15px;letter-spacing:-.3px}
+.nav-logo .box{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1.5px solid var(--accent);color:var(--accent);font-size:13px;font-weight:500;font-family:var(--font-mono)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
 
-/* hero */
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 0 80px;position:relative}
-.hero-grid{display:grid;grid-template-columns:3fr 2fr;gap:60px;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-glow);border:1px solid rgba(201,169,76,.2);padding:6px 16px;border-radius:100px;font-size:12px;color:var(--gold);letter-spacing:.5px;margin-bottom:24px}
-.hero-badge svg{width:14px;height:14px}
-.hero h1{font-size:52px;font-weight:600;line-height:1.1;margin-bottom:16px;letter-spacing:-1px}
-.hero h1 .gold{color:var(--gold)}
-.hero h1 .fade{color:var(--muted)}
-.hero p{font-size:17px;color:var(--muted);max-width:520px;margin-bottom:32px;line-height:1.8}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:.5px;cursor:pointer;text-decoration:none;transition:all .3s}
-.btn-primary:hover{background:var(--gold-dim);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,169,76,.25)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;letter-spacing:.5px;cursor:pointer;text-decoration:none;transition:all .3s}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+/* ───────────────── container ───────────────── */
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
 
-/* hero visual */
-.hero-visual{position:relative;display:flex;justify-content:center}
-.avatar-ring{width:280px;height:280px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center}
-.avatar-ring::before{content:'';position:absolute;inset:0;border-radius:50%;border:1px solid var(--border);animation:spin 20s linear infinite}
-.avatar-ring::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px dashed rgba(201,169,76,.2);animation:spin 30s linear infinite reverse}
-@keyframes spin{to{transform:rotate(360deg)}}
-.avatar-inner{width:200px;height:200px;border-radius:50%;background:linear-gradient(135deg,var(--card),var(--border));display:flex;align-items:center;justify-content:center;font-size:72px;font-weight:300;color:var(--gold);border:1px solid var(--border);overflow:hidden}
-.avatar-inner svg{width:80px;height:80px;fill:none;stroke:var(--gold);stroke-width:1}
-.floating-badge{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:12px;animation:float 6s ease-in-out infinite}
-.floating-badge svg{width:18px;height:18px;flex-shrink:0}
-.floating-badge span{color:var(--muted)}
-.floating-badge strong{color:var(--text);font-weight:500}
-.badge-1{top:10px;right:-20px;animation-delay:0s}
-.badge-2{bottom:30px;left:-30px;animation-delay:3s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+/* ───────────────── section labels ───────────────── */
+.section-label{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.5px;text-transform:uppercase}
+.section-label::after{content:'';flex:1;height:1px;background:var(--line)}
 
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:12px;overflow:hidden;margin-bottom:80px}
-.stat{background:var(--card);padding:32px 24px;text-align:center}
-.stat-num{font-size:36px;font-weight:600;color:var(--gold);margin-bottom:4px}
-.stat-label{font-size:13px;color:var(--muted);letter-spacing:.5px}
+/* ───────────────── hero ───────────────── */
+.hero{padding:80px 0 56px}
+.hero h1{font-size:40px;font-weight:600;letter-spacing:-1px;line-height:1.15;margin-bottom:6px}
+.hero h1 .accent{color:var(--accent)}
+.hero .sub{font-size:15px;color:var(--muted);margin-bottom:4px;font-family:var(--font-mono)}
+.hero .loc{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-bottom:24px}
+.hero .loc svg{width:14px;height:14px;fill:none;stroke:var(--muted);stroke-width:1.5}
+.hero p{font-size:15px;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:28px}
 
-/* section */
-.section{padding:80px 0}
-.section-header{text-align:center;margin-bottom:48px}
-.section-tag{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.section-title{font-size:32px;font-weight:600;margin-bottom:12px;letter-spacing:-.5px}
-.section-title span{color:var(--gold)}
-.section-desc{font-size:15px;color:var(--muted);max-width:540px;margin:0 auto}
+/* ───────────────── system diagram ───────────────── */
+.diagram-wrap{background:var(--card-bg);border:1px solid var(--line);border-radius:6px;padding:32px;margin-bottom:64px;box-shadow:0 2px 8px var(--shadow)}
+.diagram-wrap .diagram-title{font-family:var(--font-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.diagram{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.diagram .node{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 20px;border:1px solid var(--line);border-radius:4px;background:var(--bg);min-width:90px;transition:border-color .2s}
+.diagram .node:hover{border-color:var(--accent)}
+.diagram .node .icon{font-size:22px}
+.diagram .node .name{font-size:11px;font-weight:500;color:var(--text);text-align:center;line-height:1.3}
+.diagram .node .tech{font-size:9px;color:var(--muted);text-align:center;font-family:var(--font-mono)}
+.diagram .arrow{font-size:16px;color:var(--line);flex-shrink:0}
 
-/* project cards */
-.projects-grid{display:grid;grid-template-columns:1fr;gap:20px}
-.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;transition:all .4s;position:relative;overflow:hidden}
-.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s}
-.project-card:hover::before{opacity:1}
-.project-card:hover{border-color:rgba(201,169,76,.3);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.project-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:16px}
-.project-card-icon{width:48px;height:48px;border-radius:12px;background:var(--gold-glow);border:1px solid rgba(201,169,76,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.project-card-icon svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.5}
-.project-card h3{font-size:18px;font-weight:600;margin-bottom:4px}
-.project-card .sub{font-size:13px;color:var(--muted)}
-.project-card p{font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.7}
-.project-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.project-tags span{padding:4px 12px;background:var(--gold-glow);border:1px solid rgba(201,169,76,.1);border-radius:6px;font-size:11px;color:var(--gold);letter-spacing:.3px}
-.project-card .link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);text-decoration:none;font-size:13px;font-weight:500;transition:gap .3s}
-.project-card .link:hover{gap:10px}
-.project-card .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+/* ───────────────── approach / blurb ───────────────── */
+.blurb{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:64px}
+.blurb-item h3{font-size:13px;font-weight:600;margin-bottom:6px;letter-spacing:-.2px}
+.blurb-item p{font-size:14px;color:var(--muted);line-height:1.7}
 
-/* skills */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all .3s}
-.skill-card:hover{border-color:rgba(201,169,76,.2);transform:translateY(-2px)}
-.skill-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.skill-card-header svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0}
-.skill-card h4{font-size:14px;font-weight:500;color:var(--text)}
-.skill-card p{font-size:13px;color:var(--muted);line-height:1.6}
-.skill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+/* ───────────────── projects ───────────────── */
+.projects{margin-bottom:64px}
+.project{border:1px solid var(--line);border-radius:6px;background:var(--card-bg);margin-bottom:20px;overflow:hidden;transition:box-shadow .2s}
+.project:hover{box-shadow:0 4px 16px var(--shadow)}
+.project-header{display:flex;align-items:flex-start;justify-content:space-between;padding:24px 28px 0;gap:16px}
+.project-header h2{font-size:18px;font-weight:600;letter-spacing:-.3px;margin-bottom:2px}
+.project-header .meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.project-header .meta span{font-size:12px;color:var(--muted);font-family:var(--font-mono)}
+.project-desc{padding:8px 28px 0;font-size:14px;color:var(--muted);line-height:1.7}
+.project-desc strong{color:var(--text);font-weight:500}
+.project-stack{padding:12px 28px 0;display:flex;flex-wrap:wrap;gap:6px}
+.project-stack span{padding:3px 10px;background:var(--bg);border:1px solid var(--line);border-radius:3px;font-size:11px;font-family:var(--font-mono);color:var(--muted)}
+.project-diagram{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:16px 28px;background:var(--bg);border-top:1px solid var(--line);margin-top:16px}
+.project-diagram .pnode{padding:6px 12px;border:1px solid var(--line);border-radius:3px;background:var(--card-bg);font-size:10px;font-family:var(--font-mono);color:var(--muted)}
+.project-diagram .parrow{font-size:12px;color:var(--line)}
+.project-footer{padding:16px 28px 24px;display:flex;gap:16px;flex-wrap:wrap}
+.project-footer a{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;transition:gap .2s}
+.project-footer a:hover{gap:10px}
 
-/* contact */
-.contact-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:48px;text-align:center}
-.contact-section h3{font-size:24px;font-weight:600;margin-bottom:8px}
-.contact-section p{color:var(--muted);font-size:14px;margin-bottom:24px}
-.contact-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.contact-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:13px;transition:all .3s}
-.contact-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-.contact-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+/* ───────────────── stack ───────────────── */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:64px}
+.stack-item{background:var(--card-bg);padding:20px;display:flex;flex-direction:column;gap:4px}
+.stack-item .cat{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);font-family:var(--font-mono)}
+.stack-item .val{font-size:13px;color:var(--text);line-height:1.5}
+.stack-item .val.muted{color:var(--muted);font-size:12px}
 
-/* footer */
-footer{padding:40px 0;text-align:center;border-top:1px solid var(--border);margin-top:80px}
-footer p{font-size:13px;color:var(--muted)}
-footer .social-links{display:flex;gap:16px;justify-content:center;margin-bottom:16px}
-footer .social-links a{display:flex;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);align-items:center;justify-content:center;color:var(--muted);transition:all .3s;text-decoration:none}
-footer .social-links a:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-footer .social-links svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+/* ───────────────── contact ───────────────── */
+.contact-box{border:1px solid var(--line);border-radius:6px;background:var(--card-bg);padding:32px;margin-bottom:64px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.contact-box h3{font-size:15px;font-weight:600;letter-spacing:-.2px;margin-bottom:4px}
+.contact-box p{font-size:13px;color:var(--muted)}
+.contact-box .btns{display:flex;gap:12px;flex-wrap:wrap}
+.contact-box .btns a{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:1px solid var(--line);border-radius:4px;text-decoration:none;font-size:13px;color:var(--text);transition:all .2s}
+.contact-box .btns a:hover{border-color:var(--accent);color:var(--accent)}
 
-/* responsive */
-@media(max-width:768px){
-  .hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}
-  .hero h1{font-size:36px}
-  .hero p{margin-left:auto;margin-right:auto}
-  .hero-actions{justify-content:center}
-  .hero-visual{order:-1}
-  .avatar-ring{width:200px;height:200px}
-  .avatar-inner{width:150px;height:150px;font-size:48px}
-  .floating-badge{display:none}
-  .stats{grid-template-columns:1fr}
+/* ───────────────── footer ───────────────── */
+footer{padding:32px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer p{font-size:12px;color:var(--muted)}
+footer .links{display:flex;gap:16px}
+footer .links a{color:var(--muted);text-decoration:none;font-size:12px;transition:color .2s}
+footer .links a:hover{color:var(--text)}
+
+/* ───────────────── responsive ───────────────── */
+@media(max-width:640px){
+  .hero h1{font-size:28px}
+  .diagram{flex-direction:column}
+  .diagram .arrow{transform:rotate(90deg)}
+  .blurb{grid-template-columns:1fr}
+  .project-header{flex-direction:column}
+  .project-diagram{flex-direction:column}
+  .project-diagram .parrow{transform:rotate(90deg)}
+  .contact-box{flex-direction:column;text-align:center}
   .nav-links{display:none}
-  .section-title{font-size:26px}
-  .project-card{padding:24px}
 }
 </style>
 </head>
@@ -134,225 +118,215 @@ footer .social-links svg{width:18px;height:18px;stroke:currentColor;fill:none;st
 
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">K<span>N</span></a>
+    <a href="#" class="nav-logo"><span class="box">KN</span> Kethan Nanda</a>
     <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#stack">Stack</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="https://github.com/kethannebula-prog" target="_blank">GitHub</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="container">
 
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-grid">
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <h1>I build <span class="accent">multi-platform systems</span><br>from scratch — solo.</h1>
+  <div class="loc">
+    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Suva, Fiji
+  </div>
+  <p>
+    Java backend, Android frontend, Oracle in the cloud — I design, build, and ship complete
+    systems across platforms. Each project is a self-contained ecosystem: database,
+    server, web UI, mobile app, and deployment.
+  </p>
+
+  <!-- system diagram -->
+  <div class="diagram-wrap">
+    <div class="diagram-title">What I build — system architecture</div>
+    <div class="diagram">
+      <div class="node"><span class="icon">🗄️</span><span class="name">Oracle DB<br>Autonomous</span><span class="tech">OCI · Cloud Wallet</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><span class="icon">☕</span><span class="name">Java Backend<br>Jakarta EE</span><span class="tech">Servlets · JSP · JDBC</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><span class="icon">🌐</span><span class="name">Web Frontend<br>JSP · HTML · JS</span><span class="tech">Tomcat · MVC</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><span class="icon">📱</span><span class="name">Android App<br>Java Native</span><span class="tech">FCM · QR · AES</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><span class="icon">☁️</span><span class="name">Deployment<br>Tomcat · AWS SES</span><span class="tech">OAuth 2.0 · SMTP</span></div>
+    </div>
+  </div>
+
+  <!-- approach -->
+  <div class="blurb">
+    <div class="blurb-item">
+      <h3>Full ownership</h3>
+      <p>I build solo — architecture, database schema, server logic, frontend, mobile, and deployment. No hand-offs, no integration gaps.</p>
+    </div>
+    <div class="blurb-item">
+      <h3>Production mindset</h3>
+      <p>Every system ships with proper auth (OAuth/OTP), encrypted credentials, cloud database wallets, and production-ready configs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WORK ─── -->
+<section class="projects" id="work">
+  <div class="section-label">01 · Projects</div>
+
+  <!-- ProQik -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <h2>ProQik — Creative Professionals Marketplace</h2>
+        <div class="meta"><span>2024–2025</span><span>6 modules</span><span>Fiji</span></div>
+      </div>
+    </div>
+    <div class="project-desc">
+      <strong>A multi-platform marketplace connecting creative professionals with clients in Fiji.</strong>
+      Three user dashboards (Admin, Professional, Client) with email verification, Google OAuth login, role-based access, and real-time booking workflow. Includes an Android companion app with QR code generation and an admin Figma plugin for moderation.
+    </div>
+    <div class="project-stack">
+      <span>Java 8</span><span>Jakarta Servlets</span><span>JSP/JSTL</span><span>Oracle ATP</span>
+      <span>JDBC</span><span>Android</span><span>Firebase</span><span>AWS SES</span>
+      <span>Google OAuth 2.0</span><span>Apache Tomcat 9</span><span>Maven</span>
+    </div>
+    <div class="project-diagram">
+      <span class="pnode">Oracle ATP</span>
+      <span class="parrow">→</span>
+      <span class="pnode">Tomcat · Java Servlets</span>
+      <span class="parrow">→</span>
+      <span class="pnode">JSP Web UI</span>
+      <span class="parrow">→</span>
+      <span class="pnode">Android Client</span>
+      <span class="parrow">→</span>
+      <span class="pnode">AWS SES · FCM</span>
+    </div>
+    <div class="project-footer">
+      <a href="https://github.com/kethannebula-prog/proqik" target="_blank">→ View on GitHub</a>
+    </div>
+  </div>
+
+  <!-- DRMS -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <h2>DRMS — Digital Record Management System</h2>
+        <div class="meta"><span>2024</span><span>FNU IS432</span><span>Fiji Ministry of Health</span></div>
+      </div>
+    </div>
+    <div class="project-desc">
+      <strong>Patient medical records platform developed for Fiji's Ministry of Health as an academic project.</strong>
+      Multi-page medical intake forms covering patient registration, vitals, medical history, social history, and clinical assessment. Structured for real clinic workflows.
+    </div>
+    <div class="project-stack">
+      <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Eclipse WTP</span><span>Apache Tomcat</span>
+    </div>
+    <div class="project-diagram">
+      <span class="pnode">Form Intake (HTML/JS)</span>
+      <span class="parrow">→</span>
+      <span class="pnode">Eclipse WTP</span>
+      <span class="parrow">→</span>
+      <span class="pnode">Tomcat Server</span>
+    </div>
+    <div class="project-footer">
+      <a href="https://github.com/kethannebula-prog/DRMS" target="_blank">→ View on GitHub</a>
+    </div>
+  </div>
+
+  <!-- Test Case Manager -->
+  <div class="project">
+    <div class="project-header">
+      <div>
+        <h2>Test Case Manager</h2>
+        <div class="meta"><span>2025</span><span>MVC · H2 · Apache POI</span></div>
+      </div>
+    </div>
+    <div class="project-desc">
+      <strong>A complete QA management web app for organizing test cases, running test executions, and tracking results.</strong>
+      Supports project-level organization, hierarchical test case trees, execution runs with pass/fail/blocked status, and import/export via Excel (Apache POI), JSON (Jackson), and YAML. Built on a clean MVC architecture.
+    </div>
+    <div class="project-stack">
+      <span>Java 11</span><span>JSP/Servlets</span><span>H2 Database</span><span>Apache POI</span>
+      <span>Jackson</span><span>MVC</span><span>Maven</span>
+    </div>
+    <div class="project-diagram">
+      <span class="pnode">H2 DB</span>
+      <span class="parrow">→</span>
+      <span class="pnode">Java Servlets (MVC)</span>
+      <span class="parrow">→</span>
+      <span class="pnode">JSP Views</span>
+      <span class="parrow">→</span>
+      <span class="pnode">Excel/JSON/YAML</span>
+    </div>
+    <div class="project-footer">
+      <a href="https://github.com/kethannebula-prog/testcase-manager" target="_blank">→ View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STACK ─── -->
+<section id="stack">
+  <div class="section-label">02 · Tech Stack</div>
+  <div class="stack-grid">
+    <div class="stack-item">
+      <span class="cat">Language</span>
+      <span class="val">Java 8 / 11</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Web Layer</span>
+      <span class="val">Jakarta Servlets · JSP · JSTL</span>
+      <span class="val muted">Tomcat 9</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Database</span>
+      <span class="val">Oracle Autonomous · H2</span>
+      <span class="val muted">JDBC · Cloud Wallet</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Mobile</span>
+      <span class="val">Android (Java)</span>
+      <span class="val muted">FCM · ZXing · AES</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Auth & Security</span>
+      <span class="val">Google OAuth 2.0 · Email OTP</span>
+      <span class="val muted">AES Encryption</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Cloud & DevOps</span>
+      <span class="val">OCI · AWS SES</span>
+      <span class="val muted">Git · Maven</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Frontend</span>
+      <span class="val">HTML5 · CSS3 · JavaScript</span>
+    </div>
+    <div class="stack-item">
+      <span class="cat">Tools</span>
+      <span class="val">Eclipse · Figma Plugin API</span>
+      <span class="val muted">Apache POI · Jackson</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-label">03 · Contact</div>
+  <div class="contact-box">
     <div>
-      <div class="hero-badge">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Available for freelance
-      </div>
-      <h1>Building systems that<br><span class="gold">solve real problems</span><br><span class="fade">with clean code</span></h1>
-      <p>Full-stack developer specializing in Java, Android, and cloud databases. I design and build complete multi-platform systems from concept to deployment.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn-primary">
-          <svg viewBox="0 0 24 24" width="16" height="16" style="stroke:currentColor;fill:none;stroke-width:2"><path d="M12 5v14M5 12h14"/></svg>
-          View My Work
-        </a>
-        <a href="#contact" class="btn-secondary">
-          <svg viewBox="0 0 24 24" width="16" height="16" style="stroke:currentColor;fill:none;stroke-width:2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          Get in Touch
-        </a>
-      </div>
+      <h3>Looking for a system builder?</h3>
+      <p>Available for freelance — Java web apps, Android development, Oracle DB integration, or full-stack projects.</p>
     </div>
-    <div class="hero-visual">
-      <div class="avatar-ring">
-        <div class="avatar-inner">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="floating-badge badge-1">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
-          <div><span>Experience</span><br><strong>3+ Projects Shipped</strong></div>
-        </div>
-        <div class="floating-badge badge-2">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <div><span>Tech Stack</span><br><strong>Java · Android · Oracle</strong></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Stats -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-num">3</div>
-    <div class="stat-label">Projects Delivered</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">3</div>
-    <div class="stat-label">Tech Stacks</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Solo-built Systems</div>
-  </div>
-</div>
-
-<!-- Projects -->
-<section class="section" id="projects">
-  <div class="section-header">
-    <div class="section-tag">Portfolio</div>
-    <h2 class="section-title">Featured <span>Projects</span></h2>
-    <p class="section-desc">Complete, production-ready systems built end-to-end. Each project includes architecture design, development, and deployment.</p>
-  </div>
-  <div class="projects-grid">
-
-    <!-- ProQik -->
-    <div class="project-card">
-      <div class="project-card-header">
-        <div>
-          <h3>ProQik — Creative Professionals Marketplace</h3>
-          <div class="sub">Fiji's premier platform connecting clients with creative talent</div>
-        </div>
-        <div class="project-card-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        </div>
-      </div>
-      <p>A full-stack multi-platform marketplace with role-based dashboards, email verification, Google OAuth, and real-time booking management. Complete with an Android companion app and design prototyping plugin.</p>
-      <div class="project-tags">
-        <span>Java 8</span><span>Jakarta Servlets</span><span>JSP/JSTL</span><span>Oracle Autonomous DB</span>
-        <span>Android</span><span>AWS SES</span><span>Google OAuth 2.0</span><span>Figma Plugin</span>
-        <span>Apache Tomcat</span><span>Maven</span>
-      </div>
-      <a href="https://github.com/kethannebula-prog/proqik" target="_blank" class="link">
-        View on GitHub
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <div class="btns">
+      <a href="mailto:kethannebula@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email me
       </a>
-    </div>
-
-    <!-- DRMS -->
-    <div class="project-card">
-      <div class="project-card-header">
-        <div>
-          <h3>DRMS — Digital Record Management System</h3>
-          <div class="sub">Patient medical records for Fiji Ministry of Health</div>
-        </div>
-        <div class="project-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-      </div>
-      <p>A web-based patient record system developed as an academic project (FNU IS432). Features multi-page medical intake forms for patient registration, vitals, medical history, and clinical assessments.</p>
-      <div class="project-tags">
-        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Eclipse WTP</span><span>Apache Tomcat</span>
-      </div>
-      <a href="https://github.com/kethannebula-prog/DRMS" target="_blank" class="link">
-        View on GitHub
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-    <!-- Test Case Manager -->
-    <div class="project-card">
-      <div class="project-card-header">
-        <div>
-          <h3>Test Case Manager</h3>
-          <div class="sub">Full-featured QA test management web application</div>
-        </div>
-        <div class="project-card-icon">
-          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-      </div>
-      <p>A complete test case management system supporting project organization, test case creation, test execution runs, and Excel/JSON/YAML import. Built with MVC architecture and H2 database.</p>
-      <div class="project-tags">
-        <span>Java 11</span><span>JSP/Servlets</span><span>H2 Database</span><span>Apache POI</span>
-        <span>Jackson</span><span>MVC Architecture</span><span>Maven</span>
-      </div>
-      <a href="https://github.com/kethannebula-prog/testcase-manager" target="_blank" class="link">
-        View on GitHub
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- Skills -->
-<section class="section" id="skills">
-  <div class="section-header">
-    <div class="section-tag">Expertise</div>
-    <h2 class="section-title">Tech <span>Stack</span></h2>
-    <p class="section-desc">Technologies I work with across the full stack — from database design to mobile development.</p>
-  </div>
-  <div class="skills-grid">
-
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        <h4>Backend</h4>
-      </div>
-      <p>Java 8/11, Jakarta Servlets, JSP, JSTL, REST APIs, MVC Architecture</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-        <h4>Database</h4>
-      </div>
-      <p>Oracle Autonomous DB, JDBC, H2, SQL, Cloud Wallet Configuration</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
-        <h4>Android</h4>
-      </div>
-      <p>Java Android, Firebase Cloud Messaging, ZXing QR, AES Encryption</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <h4>DevOps & Cloud</h4>
-      </div>
-      <p>Apache Maven, Tomcat 9, AWS SES, Oracle Cloud, Git, Eclipse</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <h4>Authentication & Security</h4>
-      </div>
-      <p>Google OAuth 2.0, Email OTP (SMTP), AES Encryption, Session Management</p>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <h4>Frontend & Tooling</h4>
-      </div>
-      <p>HTML5, CSS3, JavaScript, Figma Plugin API, Gradle, Responsive Design</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- Contact -->
-<section class="section" id="contact">
-  <div class="contact-section">
-    <svg width="40" height="40" viewBox="0 0 24 24" style="stroke:var(--gold);fill:none;stroke-width:1.5;margin-bottom:16px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-    <h3>Available for freelance work</h3>
-    <p>I'm currently open to projects involving Java web development, Android apps, Oracle database integration, or full-stack builds. Let's discuss your project.</p>
-    <div class="contact-grid">
-      <a href="mailto:kethannebula@gmail.com" class="contact-btn">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        kethannebula@gmail.com
-      </a>
-      <a href="https://github.com/kethannebula-prog" target="_blank" class="contact-btn">
-        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        GitHub Profile
+      <a href="https://github.com/kethannebula-prog" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
       </a>
     </div>
   </div>
@@ -361,15 +335,11 @@ footer .social-links svg{width:18px;height:18px;stroke:currentColor;fill:none;st
 </div>
 
 <footer>
-  <div class="social-links">
-    <a href="https://github.com/kethannebula-prog" target="_blank" aria-label="GitHub">
-      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-    </a>
-    <a href="mailto:kethannebula@gmail.com" aria-label="Email">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    </a>
+  <p>&copy; 2026 Kethan Nanda · Suva, Fiji</p>
+  <div class="links">
+    <a href="mailto:kethannebula@gmail.com">Email</a>
+    <a href="https://github.com/kethannebula-prog" target="_blank">GitHub</a>
   </div>
-  <p>&copy; 2026 Kethan Nanda. Built with Java, deployed with passion.</p>
 </footer>
 
 </body>
